@@ -1,0 +1,36 @@
+version: '3'
+services:
+  nginx:
+    image: rogeryoungh/sqloj-frontend
+    networks:
+      - t-network
+    links:
+        - backend
+    ports:
+      - "10085:80"
+  backend:
+    image: rogeryoungh/sqloj-backend
+    networks:
+      - t-network
+    links:
+      - mariadb
+    ports:
+      - "10086:10086"
+  mariadb:
+    image: rogeryoungh/sqloj-database
+    restart: always
+    networks:
+      - t-network
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: sy123456
+      MYSQL_USER: test
+      MYSQL_PASSWORD: sy123456
+      MYSQL_INITDB_SKIP_TZINFO: 1
+
+networks:
+  t-network:
+    driver: bridge
