@@ -1,0 +1,25 @@
+version: '3'
+services:
+  judge-mariadb-backend:
+    image: rogeryoungh/sqloj-judge-mariadb-backend
+    networks:
+      - t-network
+    links:
+      - judge-mariadb-database
+    ports:
+      - "10100:10100"
+    environment:
+      SQLOJ_PASSWORD: ys654321
+  judge-mariadb-database:
+    image: rogeryoungh/sqloj-judge-mariadb-database
+    networks:
+      - t-network
+    environment:
+      MYSQL_ROOT_PASSWORD: sy123456
+      MYSQL_USER: test
+      MYSQL_PASSWORD: sy123456
+      MYSQL_INITDB_SKIP_TZINFO: 1
+
+networks:
+  t-network:
+    driver: bridge
