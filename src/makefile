@@ -4,13 +4,14 @@ judge_mariadb_path = ../../sqloj-judge-mariadb
 
 build: backend database frontend judge_mariadb
 
-backend:
+backend: database
 	cd $(backend_path) && ./gradlew bootJar
 	cp $(backend_path)/build/libs/sqloj-backend-0.0.1-SNAPSHOT.jar ./backend/app.jar
 	docker build ./backend  -t rogeryoungh/sqloj-backend
 
 frontend:
 	cd $(frontend_path) && yarn && yarn build
+	rm -rf ./frontend/site
 	cp -r $(frontend_path)/dist ./frontend/site
 	docker build ./frontend  -t rogeryoungh/sqloj-frontend
 

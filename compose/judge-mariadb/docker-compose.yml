@@ -9,6 +9,10 @@ services:
     ports:
       - "10100:10100"
     environment:
+      SQLOJ_PORT: 10100
+      SQLOJ_DB_URL: jdbc:mariadb://judge-mariadb-database:3306/
+      SQLOJ_DB_USER: root
+      SQLOJ_DB_PASSWORD: sy123456
       SQLOJ_PASSWORD: ys654321
   judge-mariadb-database:
     image: rogeryoungh/sqloj-judge-mariadb-database

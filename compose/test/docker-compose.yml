@@ -26,8 +26,31 @@ services:
     restart: always
     networks:
       - t-network
-    volumes:
-      - ./dbdata:/var/lib/mysql
+    # volumes:
+    #   - ./dbdata:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: sy123456
+      MYSQL_USER: test
+      MYSQL_PASSWORD: sy123456
+      MYSQL_INITDB_SKIP_TZINFO: 1
+  judge-mariadb-backend:
+    image: rogeryoungh/sqloj-judge-mariadb-backend
+    networks:
+      - t-network
+    links:
+      - judge-mariadb-database
+    ports:
+      - "10100:10100"
+    environment:
+      SQLOJ_PORT: 10100
+      SQLOJ_DB_URL: jdbc:mariadb://judge-mariadb-database:3306/
+      SQLOJ_DB_USER: root
+      SQLOJ_DB_PASSWORD: sy123456
+      SQLOJ_PASSWORD: ys654321
+  judge-mariadb-database:
+    image: rogeryoungh/sqloj-judge-mariadb-database
+    networks:
+      - t-network
     environment:
       MYSQL_ROOT_PASSWORD: sy123456
       MYSQL_USER: test
