@@ -26,8 +26,8 @@ services:
     restart: always
     networks:
       - t-network
-    # volumes:
-    #   - ./dbdata:/var/lib/mysql
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/z-init.sql
     environment:
       MYSQL_ROOT_PASSWORD: sy123456
       MYSQL_USER: test
