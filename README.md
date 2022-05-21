@@ -25,7 +25,7 @@ $ git clone https://github.com/sqloj/sqloj-docker.git
 
 请根据需要选择合适的配置。
 
-### Test 测试
+### Default 默认配置
 
 没有特殊要求的情况下，推荐使用本配置。
 
@@ -48,7 +48,7 @@ $ sudo docker-compose pull   # 拉取新镜像
 $ sudo docker-compose up -d  # 重新运行
 ```
 
-## Core 前后端配置
+### Core 前后端配置
 
 如果只需要前端和后端，可以执行
 
@@ -59,7 +59,7 @@ $ sudo docker-compose up -d
 
 接下来打开 http://localhost:10085/ 即可看到。
 
-## Judge Server 评测服务器
+### Judge Server 评测服务器
 
 添加额外的测评服务器大同小异，基本都是启动数据库和其伴生的 Java Wrapper。
 
@@ -70,7 +70,7 @@ $ cd compose/judge-mariadb
 $ sudo docker-compose up -d
 ```
 
-### Build 构建镜像
+## Build 构建镜像
 
 首先请拉下来所需的代码，并在 `src/makefile` 中修改变量 `**_path` 使其指向正确路径。
 
