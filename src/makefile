@@ -36,9 +36,9 @@ test:
 	docker-compose up
 
 push:
-	docker push rogeryoungh/sqloj-database
-	docker push rogeryoungh/sqloj-frontend
-	docker push rogeryoungh/sqloj-backend
-	docker push rogeryoungh/sqloj-judge-mariadb-backend
-	docker push rogeryoungh/sqloj-judge-mariadb-database
-	docker push rogeryoungh/sqloj-judge-h2
+	sudo docker push rogeryoungh/sqloj-database
+	sudo docker push rogeryoungh/sqloj-frontend
+	sudo docker push rogeryoungh/sqloj-backend
+	sudo docker push rogeryoungh/sqloj-judge-mariadb-backend
+	sudo docker push rogeryoungh/sqloj-judge-mariadb-database
+	sudo docker push rogeryoungh/sqloj-judge-h2
