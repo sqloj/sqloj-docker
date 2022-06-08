@@ -2,8 +2,9 @@ backend_path = ../../sqloj-backend
 frontend_path = ../../sqloj-frontend
 judge_mariadb_path = ../../sqloj-judge-mariadb
 judge_h2_path = ../../sqloj-judge-h2
+judge_sqlserver_path = ../../sqloj-judge-sqlserver
 
-build: backend database frontend judge_mariadb judge_h2
+build: backend database frontend judge_mariadb judge_h2 judge_sqlserver
 
 backend: database
 	cd $(backend_path) && ./gradlew bootJar
@@ -32,6 +33,11 @@ judge_h2:
 	cp $(judge_h2_path)/build/libs/sqloj-judge-0.0.1-SNAPSHOT.jar ./judge-h2/app.jar
 	sudo docker build ./judge-h2 -t rogeryoungh/sqloj-judge-h2
 
+judge_sqlserver:
+	cd $(judge_sqlserver_path) && ./gradlew bootJar
+	cp $(judge_sqlserver_path)/build/libs/sqloj-judge-0.0.1-SNAPSHOT.jar ./judge-sqlserver/app.jar
+	sudo docker build ./judge-sqlserver -t rogeryoungh/sqloj-judge-sqlserver
+
 test:
 	cd ../compose/test && sudo docker-compose up
 
@@ -42,3 +48,4 @@ push:
 	sudo docker push rogeryoungh/sqloj-judge-mariadb-backend
 	sudo docker push rogeryoungh/sqloj-judge-mariadb-database
 	sudo docker push rogeryoungh/sqloj-judge-h2
+	sudo docker push rogeryoungh/sqloj-judge-sqlserver
