@@ -1,11 +1,17 @@
 version: '3'
 services:
   judge-h2:
-    image: rogeryoungh/sqloj-judge-h2
+    image: clumsysysy/sqloj-judge-h2
     ports:
-      - "10100:10100"
+      - "10101:10100"
+    networks:
+      - t-network
     environment:
       SQLOJ_PORT: 10100
       SQLOJ_DB_USER: root
       SQLOJ_DB_PASSWORD: sy123456
       SQLOJ_PASSWORD: ys654321
+
+networks:
+  t-network:
+    driver: bridge
