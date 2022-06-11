@@ -4,4 +4,4 @@ src/**/site
 
 compose/**/dbdata/
 
-vscode/
+.vscode/
