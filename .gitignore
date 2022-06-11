@@ -3,3 +3,5 @@ src/**/init.sql
 src/**/site
 
 compose/**/dbdata/
+
+vscode/
