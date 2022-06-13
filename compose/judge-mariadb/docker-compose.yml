@@ -1,13 +1,13 @@
 version: '3'
 services:
   judge-mariadb-backend:
-    image: rogeryoungh/sqloj-judge-mariadb-backend
+    image: clumsysysy/sqloj-judge-mariadb-backend
     networks:
       - t-network
     links:
       - judge-mariadb-database
     ports:
-      - "10100:10100"
+      - "10110:10100"
     environment:
       SQLOJ_PORT: 10100
       SQLOJ_DB_URL: jdbc:mariadb://judge-mariadb-database:3306/
@@ -15,7 +15,7 @@ services:
       SQLOJ_DB_PASSWORD: sy123456
       SQLOJ_PASSWORD: ys654321
   judge-mariadb-database:
-    image: rogeryoungh/sqloj-judge-mariadb-database
+    image: clumsysysy/sqloj-judge-mariadb-database
     networks:
       - t-network
     environment:
