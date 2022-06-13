@@ -1,7 +1,7 @@
 version: '3'
 services:
   nginx:
-    image: rogeryoungh/sqloj-frontend
+    image: clumsysysy/sqloj-frontend
     networks:
       - t-network
     links:
@@ -9,7 +9,7 @@ services:
     ports:
       - "10085:80"
   backend:
-    image: rogeryoungh/sqloj-backend
+    image: clumsysysy/sqloj-backend
     networks:
       - t-network
     links:
@@ -22,7 +22,7 @@ services:
       SQLOJ_DB_USER: root
       SQLOJ_DB_PASSWORD: sy123456
   mariadb:
-    image: rogeryoungh/sqloj-database
+    image: clumsysysy/sqloj-database
     restart: always
     networks:
       - t-network

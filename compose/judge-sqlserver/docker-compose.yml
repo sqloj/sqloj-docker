@@ -1,29 +1,30 @@
 version: '3'
 services:
   judge-sqlserver-backend:
-    image: rogeryoungh/sqloj-judge-sqlserver-backend
+    image: clumsysysy/sqloj-judge-sqlserver-backend
     networks:
       - t-network
     links:
       - judge-sqlserver-database
     ports:
-      - "10101:10100"
+      - "10111:10100"
     environment:
       SQLOJ_PORT: 10100
-      SQLOJ_DB_URL: jdbc:sqlserver://judge-sqlserver-database:3306/
+      SQLOJ_DB_URL: jdbc:sqlserver://judge-sqlserver-database:1433
       SQLOJ_DB_USER: sa
-      SQLOJ_DB_PASSWORD: Sy_123456
+      SQLOJ_DB_PASSWORD: SyPassWord123
       SQLOJ_PASSWORD: ys654321
 # https://github.com/microsoft/mssql-docker/issues/615
   judge-sqlserver-database:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2019-latest
     restart: always
+    networks:
+      - t-network
 #    volumes:
 #      - ./dbdata:/var/opt/data
     environment:
       ACCEPT_EULA: Y
-      SA_PASSWORD: Sy_123456
-
+      SA_PASSWORD: SyPassWord123
 networks:
   t-network:
     driver: bridge
