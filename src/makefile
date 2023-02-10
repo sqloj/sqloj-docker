@@ -19,8 +19,8 @@ frontend:
 	sudo docker build ./sqloj-frontend  -t clumsysysy/sqloj-frontend
 
 database:
-	cp $(backend_path)/database/init.sql ./database/init.sql
-	sudo docker build ./database -t clumsysysy/sqloj-database
+	cp $(backend_path)/database/init.sql ./sqloj-database/init.sql
+	sudo docker build ./sqloj-database -t clumsysysy/sqloj-database
 
 judge_mariadb:
 	cd $(judge_mariadb_path) && ./gradlew bootJar
