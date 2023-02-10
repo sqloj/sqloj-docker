@@ -22,6 +22,8 @@ $ git clone https://github.com/sqloj/sqloj-docker.git
 - `core`，包括前端和后端，不包括评测端。
 - `judge-h2`，h2 数据库的评测端。
 - `judge-mariadb`，mariadb 数据库的评测端。
+- `judge-sqlserver`，SQL Server 数据库的评测端。
+- `judge-redis`，Redis 数据库的评测端。
 
 请根据需要选择合适的配置。
 

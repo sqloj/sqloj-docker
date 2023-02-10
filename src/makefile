@@ -3,8 +3,9 @@ frontend_path = ../../sqloj-frontend
 judge_mariadb_path = ../../sqloj-judge-mariadb
 judge_h2_path = ../../sqloj-judge-h2
 judge_sqlserver_path = ../../sqloj-judge-sqlserver
+juege_redis_path = ../../sqloj-judge-redis
 
-build: backend database frontend judge_mariadb judge_h2 judge_sqlserver
+build: backend database frontend judge_mariadb judge_h2 judge_sqlserver judge_redis
 
 backend: database
 	cd $(backend_path) && ./gradlew bootJar
@@ -18,8 +19,8 @@ frontend:
 	sudo docker build ./sqloj-frontend  -t clumsysysy/sqloj-frontend
 
 database:
-	cp $(backend_path)/database/init.sql ./database/init.sql
-	sudo docker build ./database -t clumsysysy/sqloj-database
+	cp $(backend_path)/database/init.sql ./sqloj-database/init.sql
+	sudo docker build ./sqloj-database -t clumsysysy/sqloj-database
 
 judge_mariadb:
 	cd $(judge_mariadb_path) && ./gradlew bootJar
@@ -38,6 +39,13 @@ judge_sqlserver:
 	cp $(judge_sqlserver_path)/build/libs/sqloj-judge-0.0.1-SNAPSHOT.jar ./judge-sqlserver/backend/app.jar
 	sudo docker build ./judge-sqlserver/backend -t clumsysysy/sqloj-judge-sqlserver-backend
 
+judge_redis:
+	cd $(juege_redis_path) && ./gradlew bootJar
+	cp $(juege_redis_path)/build/libs/sqloj-judge-0.0.1-SNAPSHOT.jar ./judge-redis/backend/app.jar
+	cp $(juege_redis_path)/database/redis.conf ./judge-redis/database/redis.conf
+	sudo docker build ./judge-redis/backend -t clumsysysy/sqloj-judge-redis-backend
+	sudo docker build ./judge-redis/database -t clumsysysy/sqloj-judge-redis-database
+
 test:
 	cd ../compose/test && sudo docker-compose up
 
@@ -49,3 +57,5 @@ push:
 	docker push clumsysysy/sqloj-judge-mariadb-database
 	docker push clumsysysy/sqloj-judge-h2
 	docker push clumsysysy/sqloj-judge-sqlserver-backend
+	docker push clumsysysy/sqloj-judge-redis-backend
+	docker push clumsysysy/sqloj-judge-redis-database

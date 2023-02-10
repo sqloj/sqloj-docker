@@ -1,0 +1,30 @@
+version: '3'
+services:
+  judge-redis-backend:
+    image: clumsysysy/sqloj-judge-redis-backend
+    networks:
+      - t-network
+    links:
+      - judge-redis-database
+    ports:
+      - "10001:10100"
+    environment:
+      SQLOJ_PORT: 10100
+      SQLOJ_PASSWORD: ys654321
+      REDIS_PORT: 6379
+      REDIS_JUDGE_DATABASE: 1
+      REDIS_PASSWORD: sy123456
+      REDIS_HOST: judge-redis-database
+  judge-redis-database:
+    image: clumsysysy/sqloj-judge-redis-database
+    restart: always
+    networks:
+      - t-network
+    volumes:
+      - /data/redis/data:/data
+      - /data/redis/conf/redis.conf:/etc/redis/redis.conf
+    command: redis-server --requirepass sy123456
+    
+networks:
+  t-network:
+    driver: bridge
